@@ -15,8 +15,11 @@ public class RegexValidation {
             String lastname = sc.next();
             System.out.println("eg.abc.xyz@bl.co.in\nEnter email: ");
             String emailValid = sc.next();
+            System.out.println("Enter mobile number");
+            String phoneNo = sc.next();
             firstNameLastnameValidate(firstName,lastname);
             emailValidation(emailValid);
+            phoneValidation(phoneNo);
         }
     }
     public static void firstNameLastnameValidate(String firstName, String lastName){
@@ -39,6 +42,16 @@ public class RegexValidation {
         }
         else {
             System.out.println("Email is not Valid");
+        }
+    }
+    public static void phoneValidation(String phoneNum){
+        Pattern phNo = Pattern.compile("^(?:(?:\\+|0{0,2})91(\\s*[\\ -]\\s*)?|[0]?)?[789]\\d{9}|(\\d[ -]?){10}\\d$");
+        Matcher matchPhone = phNo.matcher(phoneNum);
+        if (matchPhone.matches()){
+            System.out.println("Phone number is valid");
+        }
+        else {
+            System.out.println("enter valid phone number");
         }
     }
 
