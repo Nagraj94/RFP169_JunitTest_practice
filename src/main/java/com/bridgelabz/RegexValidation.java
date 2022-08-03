@@ -58,13 +58,13 @@ public class RegexValidation {
         }
     }
     public static void passwordValidation(String password){
-        Pattern passWord = Pattern.compile("[a-z]{8,}");
+        Pattern passWord = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z]).{8,20}$");
         Matcher matchPassword = passWord.matcher(password);
         if (matchPassword.matches()){
             System.out.println("Password is valid");
         }
         else {
-            System.out.println("Password should contain atleast 8 character ");
+            System.out.println("Password should contain atleast 8 character, 1 uppercase,1 lowercase ");
         }
     }
 }
