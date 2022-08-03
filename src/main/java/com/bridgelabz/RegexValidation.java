@@ -10,19 +10,21 @@ public class RegexValidation {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter first name: ");
         String firstName = sc.next();
-        firstNameValidate(firstName);
+        System.out.println("Enter last name: ");
+        String lastname = sc.next();
+        firstNameLastnameValidate(firstName,lastname);
 
     }
-    public static void firstNameValidate(String firstName){
+    public static void firstNameLastnameValidate(String firstName, String lastName){
         Pattern name = Pattern.compile("^[A-Z]\\w{3,}$");
         Matcher matchFirstName = name.matcher(firstName);
-        if (matchFirstName.matches()){
+        Matcher matchLastName = name.matcher(lastName);
+        if (matchFirstName.matches() && matchLastName.matches()){
             System.out.println("Valid");
         }
         else {
             System.out.println("first letter should start with capital");
         }
-
-
     }
+
 }
