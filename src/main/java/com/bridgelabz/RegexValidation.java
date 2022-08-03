@@ -8,12 +8,16 @@ public class RegexValidation {
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        System.out.println("Enter first name: ");
-        String firstName = sc.next();
-        System.out.println("Enter last name: ");
-        String lastname = sc.next();
-        firstNameLastnameValidate(firstName,lastname);
-
+        while (true) {
+            System.out.println("Enter first name: ");
+            String firstName = sc.next();
+            System.out.println("Enter last name: ");
+            String lastname = sc.next();
+            System.out.println("eg.abc.xyz@bl.co.in\nEnter email: ");
+            String emailValid = sc.next();
+            firstNameLastnameValidate(firstName,lastname);
+            emailValidation(emailValid);
+        }
     }
     public static void firstNameLastnameValidate(String firstName, String lastName){
         Pattern name = Pattern.compile("^[A-Z]\\w{3,}$");
@@ -24,6 +28,17 @@ public class RegexValidation {
         }
         else {
             System.out.println("first letter should start with capital");
+        }
+    }
+    public static void emailValidation(String email){
+        Pattern emailValid = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
+                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+        Matcher matchEmail = emailValid.matcher(email);
+        if (matchEmail.matches()){
+            System.out.println("Email is Valid");
+        }
+        else {
+            System.out.println("Email is not Valid");
         }
     }
 
