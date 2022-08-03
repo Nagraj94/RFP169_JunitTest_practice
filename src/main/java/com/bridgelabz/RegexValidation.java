@@ -17,9 +17,12 @@ public class RegexValidation {
             String emailValid = sc.next();
             System.out.println("Enter mobile number");
             String phoneNo = sc.next();
+            System.out.println("Enter password");
+            String passWord = sc.next();
             firstNameLastnameValidate(firstName,lastname);
             emailValidation(emailValid);
             phoneValidation(phoneNo);
+            passwordValidation(passWord);
         }
     }
     public static void firstNameLastnameValidate(String firstName, String lastName){
@@ -54,5 +57,14 @@ public class RegexValidation {
             System.out.println("enter valid phone number");
         }
     }
-
+    public static void passwordValidation(String password){
+        Pattern passWord = Pattern.compile("[a-z]{8,}");
+        Matcher matchPassword = passWord.matcher(password);
+        if (matchPassword.matches()){
+            System.out.println("Password is valid");
+        }
+        else {
+            System.out.println("Password should contain atleast 8 character ");
+        }
+    }
 }
