@@ -58,8 +58,7 @@ public class RegexValidation{
         return matchLastName.matches();
     }
     public boolean emailValidation(String email){
-        Pattern emailValid = Pattern.compile("^(?=.{1,64}@)[A-Za-z0-9_-]+(\\.[A-Za-z0-9_-]+)*@"
-                + "[^-][A-Za-z0-9-]+(\\.[A-Za-z0-9-]+)*(\\.[A-Za-z]{2,})$");
+        Pattern emailValid = Pattern.compile("^[a-zA-Z0-9]+([._-[+]][a-zA-Z0-9]+)*@([a-z1-9]+)([.][a-z]*)?(\\.[a-z]{2,})$");
         Matcher matchEmail = emailValid.matcher(email);
         if (matchEmail.matches()){
             System.out.println("Email is Valid");
