@@ -6,88 +6,67 @@ import java.util.regex.Pattern;
 
 public class RegexValidation{
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws RegexValidationExceptions {
         Scanner sc = new Scanner(System.in);
         RegexValidation regex = new RegexValidation();
             System.out.println("Enter first name: ");
-            String firstName = sc.next();
+            regex.firstName.validation(sc.next());
             System.out.println("Enter last name: ");
-            String lastname = sc.next();
+            regex.lastName.validation(sc.next());
             System.out.println("eg.abc.xyz@bl.co.in\nEnter email: ");
-            String emailValid = sc.next();
+            regex.email.validation(sc.next());
             System.out.println("Enter mobile number");
-            String phoneNo = sc.next();
+            regex.phoneNum.validation(sc.next());
             System.out.println("Enter password");
-            String passWord = sc.next();
-            regex.firstNameValidate(firstName);
-            regex.lastNameValidate(lastname);
-            regex.emailValidation(emailValid);
-            regex.phoneValidation(phoneNo);
-            regex.passwordValidation(passWord);
-        System.out.println("\nValid Emails: ");
-        String[] validEmail={"abc@yahoo.com","abc-100@yahoo.com","abc.100@yahoo.com","abc111@abc.com","abc-100@abc.net","abc.100@abc.com.au","abc@1.com","abc@gmail.com.com","abc+100@gmail.com"};
-        for (String s : validEmail) {
-            regex.emailValidation(s);
-        }
+            regex.password.validation(sc.next());
 
-        System.out.println("\nInValid Emails: ");
-        String[] inValidEmail={"abc","abc@.com.my","abc123@gmail.a","abc123@.com","abc123@.com.com","abc()*@gmail.com","abc@%*.com","abc..2002@gmail.com","abc.@gmail.com","abc@abc@gmail.com","abc@gmail.com.1a","abc@gmail.com.aa.au"};
-        for (String s : inValidEmail) {
-            regex.emailValidation(s);
-        }
 
     }
-    public boolean firstNameValidate(String firstName){
+    public RegexValidationInter firstName = (firstName) -> {
         Pattern name = Pattern.compile("^[A-Z]\\w{3,}$");
         Matcher matchFirstName = name.matcher(firstName);
         if (matchFirstName.matches())
-            System.out.println("Is Valid");
+            return true;
         else
-            System.out.println("Is not valid");
-
-
-        return matchFirstName.matches();
-    }
-    public boolean lastNameValidate(String lastName){
+            throw new RegexValidationExceptions("Invalid First name: "+ firstName);
+    };
+    public RegexValidationInter lastName = (lastName) -> {
         Pattern name = Pattern.compile("^[A-Z]\\w{3,}$");
         Matcher matchLastName = name.matcher(lastName);
         if (matchLastName.matches())
-            System.out.println("Is Valid");
+            return true;
         else
-            System.out.println("Is not valid");
-        return matchLastName.matches();
-    }
-    public boolean emailValidation(String email){
+            throw new RegexValidationExceptions("Invali Last name: "+lastName);
+    };
+    public RegexValidationInter email = (email) ->{
         Pattern emailValid = Pattern.compile("^[a-zA-Z0-9]+([._-[+]][a-zA-Z0-9]+)*@([a-z1-9]+)([.][a-z]*)?(\\.[a-z]{2,})$");
         Matcher matchEmail = emailValid.matcher(email);
         if (matchEmail.matches()){
-            System.out.println("Email is Valid");
+            return true;
         }
         else {
-            System.out.println("Email is not Valid");
+            throw new RegexValidationExceptions("Invalid email: "+email);
         }
-        return matchEmail.matches();
-    }
-    public boolean phoneValidation(String phoneNum){
+    };
+    public RegexValidationInter phoneNum = (phoneNum) -> {
         Pattern phNo = Pattern.compile("^(?:(?:\\+|0{0,2})91(\\s*[\\ -]\\s*)?|[0]?)?[789]\\d{9}|(\\d[ -]?){10}\\d$");
         Matcher matchPhone = phNo.matcher(phoneNum);
         if (matchPhone.matches()){
-            System.out.println("Phone number is valid");
+            return true;
         }
         else {
-            System.out.println("enter valid phone number");
+            throw new RegexValidationExceptions("Invalid phone number: "+phoneNum);
         }
-        return matchPhone.matches();
-    }
-    public boolean passwordValidation(String password){
+    };
+    public RegexValidationInter password  = (password) ->{
         Pattern passWord = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])+(?=.*[@#$%^&+=])+(?=.*[0-9]).{8,20}$");
         Matcher matchPassword = passWord.matcher(password);
         if (matchPassword.matches()){
-            System.out.println("Password is valid");
+            return true;
         }
         else {
-            System.out.println("Password should contain atleast 8 character, 1 uppercase,1 lowercase, 1 number, 1 special character");
+            throw new RegexValidationExceptions("Invali password: ");
         }
-        return matchPassword.matches();
-    }
+
+    };
 }
